@@ -1,7 +1,7 @@
 """FH-20/21/33: Agent loop. Gemini + MCP tools -> list[Suggestion].
 Run: python -m agent.agent
-Phase 1: model tools call karke data jama karta hai.
-Phase 2: structured output (JSON schema) se Suggestion list banti hai.
+Phase 1: model will call tools and collect data.
+Phase 2: from structured output (JSON schema) it will make list.
 """
 import asyncio
 import json
@@ -128,14 +128,14 @@ async def run_agent(user_prompt: str | None = None) -> list[Suggestion]:
                     )
                 contents.append(types.Content(role="user", parts=response_parts))
             else:
-                raise RuntimeError("MAX_STEPS khatam, analysis nahi mili")
+                raise RuntimeError("MAX_STEPS reached, no analysis was produced")
 
     # Phase 2: structured output
     final_prompt = (
         f"User request: {prompt}\n\n"
         "Tool data:\n" + "\n\n".join(gathered) + f"\n\nAnalysis:\n{analysis}\n\n"
-        "Ab har holding ke liye ek Suggestion do. data_timestamp tool data ke "
-        "timestamp se copy karo. confidence 0 se 1 ke beech."
+        "Give one suggestion for each holding. Copy data_timestamp from the "
+        "timestamp in the tool data. confidence should be between 0 and 1."
     )
     final = generate_with_retry(
         client,

@@ -128,7 +128,7 @@ async def run_agent(user_prompt: str | None = None) -> list[Suggestion]:
                     )
                 contents.append(types.Content(role="user", parts=response_parts))
             else:
-                raise RuntimeError("MAX_STEPS khatam, analysis nahi mili")
+                raise RuntimeError("MAX_STEPS reached, no analysis was produced")
 
     # Phase 2: structured output
     final_prompt = (

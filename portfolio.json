@@ -1,0 +1,13 @@
+{
+  "cash": 5000.0,
+  "holdings": [
+    {"symbol": "AAPL", "quantity": 10, "buy_price": 170.0},
+    {"symbol": "TSLA", "quantity": 5, "buy_price": 220.0},
+    {"symbol": "NVDA", "quantity": 8, "buy_price": 120.0}
+  ],
+  "goals": [
+    {"horizon": "10_months", "target_value": 12000, "risk": "medium"},
+    {"horizon": "20_months", "target_value": 18000, "risk": "medium"},
+    {"horizon": "10_years", "target_value": 60000, "risk": "low"}
+  ]
+}
